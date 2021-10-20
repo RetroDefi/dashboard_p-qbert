@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>pQBERT Dashboard by RetroDEFI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="adminLTE/plugins/fontawesome-free/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="adminLTE/dist/css/adminlte.min.css" />
+  </head>
+  <body class="hold-transition layout-top-nav dark-mode">
+    <div
+      class="background no-anim"
+      style="
+        top: 56px;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        left: 0;
+        top: 0;
+        z-index: -1;
+      "
+      data-cfapps-welcome-bar-adjusted-fixed-element-original-top="0"
+    >
+      <img
+        class="layer bg"
+        src="img_retro/background.jpg"
+        style="
+          position: absolute;
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          background: 0 0;
+        "
+      />
+    </div>
+
+    <div class="wrapper" style="background-color: unset;">
+      <div class="content-wrapper" style="background-color: unset;">
+        <div class="content">
+          <div class="container">
+            <div id="alert-error-https" class="row" style="display: none;">
+              <br />
+              <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                  <h5>
+                    <i class="icon fas fa-exclamation-triangle"></i> Alert!
+                  </h5>
+                  This dashboard is only available through a secure HTTPS
+                  connection. Check the url.
+                </div>
+              </div>
+            </div>
+            <div id="prepare">
+              <br />
+              <br />
+              <br />
+              <div class="row">
+                <div class="bg-white card col-sm-12">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="description-block">
+                        <img src="img_retro/tittlelogo.png" />
+                      </div>
+                    </div>
+                    <div class="col-sm-5" style="padding-bottom: 1rem;">
+                      <br />
+                      <br />
+                      <br />
+                      <h3>
+                        Welcome to pQBERT Dashboard!
+                      </h3>
+                      <p>Connect your Wallet to Continue:</p>
+                      <button
+                        id="btn-connect"
+                        type="button"
+                        class="btn btn-block btn-primary btn-lg"
+                      >
+                        <i class="fas fa-bullseye"></i>
+                        Connect Wallet
+                      </button>
+                    </div>
+                    <div class="col-sm-1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="connected" style="display: none;">
+              <div class="row">
+                <div id="button-bar" class="btn-group">
+                  <button
+                    id="btn-refresh"
+                    type="button"
+                    class="btn btn-default"
+                  >
+                    <i class="fa fa-undo"></i>
+                  </button>
+                  <button
+                    id="btn-disconnect"
+                    type="button"
+                    class="btn btn-default"
+                  >
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <br />
+              <img src="img_retro/retro200logo.png" />
+              <div class="row">
+                <div class="bg-white card col-sm-12">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="description-block">
+                        <img src="img_retro/tittlelogo.png" width="50%" />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="description-block">
+                        <div class="display-3 text-success">
+                          <strong id="dividends-distributed">-</strong>
+                        </div>
+                        <span class="description-text bg-warning"
+                          >TOTAL DIVIDENDS PAID TO HOLDERS</span
+                        >
+                      </div>
+                      <div class="description-block">
+                        <div class="inner">
+                          <h3 id="token-price">-</h3>
+                          <span><i class="fas fa-dollar-sign"></i></span>
+                          <span class="description-text bg-warning"
+                            >P-QBERT PRICE</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="small-box card">
+                    <div class="inner">
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <h5 class="text-warning">
+                            P-QBERT CONTRACT:
+                            <span class="text-white"
+                              >0x40038c83e459937a988b669f1159cc78d8fdad68</span
+                            >
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="small-box card bg-green">
+                    <div class="inner">
+                      <h3 id="token-balance">0</h3>
+                      <span><i class="fas fa-wallet"></i></span>
+                      <span class="description-text">P-QBERT Balance</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="small-box card bg-blue">
+                    <div class="inner">
+                      <h3><span id="dividends-payed">-</span></h3>
+                      <span><i class="fas fa-layer-group"></i></span>
+                      <span class="description-text">My Total Dividends</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card card-primary">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="info-box">
+                            <span class="info-box-icon bg-blue"
+                              ><i class="fas fa-coins"></i
+                            ></span>
+                            <div class="info-box-content">
+                              <span class="info-box-text"
+                                >Next Dividend Payout</span
+                              >
+                              <span
+                                id="withdrawable-dividends"
+                                class="info-box-number"
+                                >-</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="info-box">
+                            <span class="info-box-icon bg-blue"
+                              ><i class="fas fa-stopwatch"></i
+                            ></span>
+                            <div class="info-box-content">
+                              <span class="info-box-text"
+                                >Automatic Payment Progress</span
+                              >
+                              <div class="progress">
+                                <div
+                                  id="auto-payment-bar"
+                                  class="progress-bar bg-primary progress-bar-striped"
+                                  role="progressbar"
+                                  style="width: 0%;"
+                                ></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="info-box">
+                            <div class="info-box-content">
+                              <button
+                                id="btn-claim"
+                                type="button"
+                                class="btn btn-block btn-primary btn-lg"
+                              >
+                                <i class="fas fa-donate"></i>
+                                <span id="btn-claim-text"
+                                  >Claim My Dividends</span
+                                >
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p class="text-muted">
+                            Last Dividends Received on
+                            <span id="last-payment">-</span>
+                          </p>
+                          <p class="text-muted">
+                            You need a minimum of 400 pQBERT's to be eligible
+                            for MATIC dividends*
+                          </p>
+                          <p class="text-muted">
+                            Dividend payments to holders may not occur every
+                            hour if trading volume is low. When this is the
+                            case, dividends for each holder will keep
+                            accummulating.**
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card card-primary">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="small-box bg-info">
+                            <div class="inner">
+                              <h4>
+                                <i class="fas fa-grin-stars"></i> My Dividends
+                                Stats:
+                              </h4>
+                              <hr />
+                              <h3>
+                                <span id="estimation-hour" class="text-warning"
+                                  >0</span
+                                >
+                                <small>Hourly</small>
+                              </h3>
+                              <h3>
+                                <span id="estimation-day" class="text-warning"
+                                  >0</span
+                                >
+                                <small>Daily</small>
+                              </h3>
+                              <h3>
+                                <span id="estimation-week" class="text-warning"
+                                  >0</span
+                                >
+                                <small>Weekly</small>
+                              </h3>
+                              <h3>
+                                <span id="estimation-month" class="text-warning"
+                                  >0</span
+                                >
+                                <small>Monthly</small>
+                              </h3>
+                              <small
+                                >Calculated based on daily volume and current
+                                price**</small
+                              >
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="description-block">
+                            <img
+                              src="img_retro/pqbertdashboard.png"
+                              width="60%"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label class="col-form-label" for="daily-volume-txt"
+                            ><i class="fas fa-calculator"></i> Estimated volume
+                            24h (in tokens)</label
+                          >
+                          <input
+                            id="daily-volume-txt"
+                            class="form-control"
+                            type="text"
+                            placeholder="Daily volume"
+                            value="20000000000"
+                          />
+                        </div>
+                      </div>
+                      <br />
+                      <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                          <form
+                            action="https://app.apeswap.finance/swap?outputCurrency=0x40038c83e459937a988b669f1159cc78d8fdad68"
+                            method="get"
+                            target="_blank"
+                          >
+                            <button
+                              type="submit"
+                              class="btn btn-block btn-primary btn-lg"
+                            >
+                              <img
+                                src="img_retro/PQBERT.svg"
+                                width="28"
+                                alt="PQBERT"
+                              />
+                              Buy pQBERT
+                            </button>
+                          </form>
+                        </div>
+                        <div class="col-md-4"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="main-footer">
+        <div class="float-right d-none d-sm-inline">
+          Powered by Polygon -
+          <i class="fas fa-heart"></i>
+          <strong>RetroDEFI - 2021</strong>
+        </div>
+
+        <a href="https://twitter.com/retrodefi" target="_blank">
+          <img
+            src="img_retro/twitter_web.png"
+            width="32"
+            alt="Twitter"
+            class="brand-image img-circle elevation-1"
+            style="opacity: 0.8; margin: 0px 6px;"
+          />
+        </a>
+        <a href="https://t.me/retrodefibsc" target="_blank">
+          <img
+            src="img_retro/telegram_web.png"
+            width="32"
+            alt="Telegram"
+            class="brand-image img-circle elevation-1"
+            style="opacity: 0.8; margin: 0px 6px;"
+          />
+        </a>
+        <a
+          href="https://app.apeswap.finance/swap?outputCurrency=0x40038c83e459937a988b669f1159cc78d8fdad68"
+          target="_blank"
+        >
+          <img
+            src="img_retro/apeswap_web.svg"
+            width="32"
+            alt="ApeSwap"
+            class="brand-image img-circle elevation-1"
+            style="opacity: 0.8; margin: 0px 6px;"
+          />
+        </a>
+        <a
+          href="https://dex.guru/token/0x40038c83e459937a988b669f1159cc78d8fdad68-polygon"
+          target="_blank"
+        >
+          <img
+            src="img_retro/dexguru_web.png"
+            width="32"
+            alt="Dexguru"
+            class="brand-image img-circle elevation-1"
+            style="opacity: 0.8; margin: 0px 6px;"
+          />
+        </a>
+        <a
+          href="https://polygonscan.com/token/0x40038c83e459937a988b669f1159cc78d8fdad68"
+          target="_blank"
+        >
+          <img
+            src="img_retro/polyscan_web.png"
+            width="32"
+            alt="Polyscan"
+            class="brand-image img-circle elevation-1"
+            style="opacity: 0.8; margin: 0px 6px;"
+          />
+        </a>
+      </footer>
+    </div>
+
+    <script src="adminLTE/plugins/jquery/jquery.min.js"></script>
+
+    <script src="adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="adminLTE/dist/js/adminlte.min.js"></script>
+
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/web3@1.6.0/dist/web3.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/web3modal@1.9.3/dist/index.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/@walletconnect/web3-provider@1.5.2/dist/umd/index.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/fortmatic@2.2.1/dist/fortmatic.js"
+    ></script>
+    <script type="text/javascript" src="abi.js"></script>
+    <script type="text/javascript" src="dashboard_qbert.js"></script>
+  </body>
+</html>
